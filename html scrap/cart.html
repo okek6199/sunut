@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page with Shopping Cart</title>
+    <style>
+       /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(#1100, rgb(47, 129, 48)); /* Light Green Background */
+        }
+         /* Header Styles */
+        .header-container {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           padding: 10px 20px;
+        }
+      
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 50px; /* Set a logo width */
+            height: 50px; /* Set a logo height */
+            margin-right: 10px; /* Space between the logo and text*/
+        }
+        
+        .home-button-container {
+            text-align: center; /* Center alignment */
+            margin-top: 20px; /* Add margin above the home button */
+            flex-grow: 1; /* Allow home button to occupy remaining space */
+           display: flex;
+           justify-content: center; /* Center alignment */
+        }
+
+        .home-button {
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+        }
+        
+        /* Dropdown Menu Styles */
+        .category-select-container,
+        .product-grid-container,
+        .shopping-cart-container {
+            padding: 20px; /* Added container padding for consistency */
+            margin-top: 20px; /* Add a margin for spacing between the sections*/
+        }
+        
+        /* Product Grid Styles */
+        .product-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+            gap: 15px; /* Added gap between product items */
+            max-width: 1200px; /* Added a max width for better readability */
+            margin: 0 auto; /* Added center alignment for the grid */
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            background-color: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100px;
+            height: auto;
+            margin: 10px auto;
+        }
+
+        .product-title {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .product-price {
+             color: #4CAF50;
+            font-weight: bold;
+            margin: 10px 0;
+         }
+        
+         /* Cart and Total Styles */
+        .total-cart-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+         
+        .shopping-cart-container {
+            margin: 20px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 800px; /* added max width for readability */
+            margin: 20px auto; /* added center alignment for the cart */
+        }
+
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .cart-table th,
+        .cart-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+         .cart-table th {
+            background-color: #f4f4f4;
+        }
+
+        .remove-item-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .remove-item-button:hover {
+            background-color: #d32f2f;
+        }
+        
+        .add-to-cart-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quantity-input {
+           width: 40px;
+           padding: 4px;
+           text-align: center;
+           border: 1px solid #ccc;
+           border-radius: 4px;
+       }
+
+       .quantity-input:focus {
+           outline: none;
+           border-color: #4CAF50;
+       }
+    </style>
+</head>
+<body>
+   
+   <!-- Header -->
+   <div class="header-container">
+     <div class="logo-container">
+          <img class="logo" src="path_to_image/logo.png" alt="Logo">
+      </div>
+      <div class="home-button-container">
+           <a href="#" class="home-button">Home</a>
+      </div>
+   </div>
+    <!-- Product Category Dropdown -->
+    <div class="category-select-container">
+      <label for="categorySelect">Products: </label>
+        <select id="categorySelect">
+            <option value="">Select Category</option>
+            <option value="ornamental">Ornamental Plants</option>
+            <option value="gardening">Gardening Tools</option>
+            <option value="saplings">Tree Saplings</option>
+            <option value="seeds">Seeds</option>
+        </select>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="product-grid-container"></div>
+
+    <!-- Shopping Cart -->
+    <div class="shopping-cart-container">
+        <h3>Shopping Cart</h3>
+        <table class="cart-table" id="cartTable">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <a href="payment.html">
+            <button>Proceed to Payment</button>
+        </a>
+    </div>
+    
+    <!-- Total Amount -->
+     <div class="total-cart-container">
+        <strong>Total: $<span id="totalAmount">0.00</span></strong>
+    </div>
+     <script>
+        // Product Data
+        const productData = {
+            ornamental: {
+                name: 'Ornamental Plants',
+                items: [
+                    {
+                        name: 'Portulaca Grandiflora',
+                        price: 12,
+                        image: 'path_to_image/Portulaca_Grandiflora.png',
+                    },
+                     {
+                        name: 'Bougainvillea',
+                        price: 10,
+                        image: 'path_to_image/Bougainvillea.png',
+                    },
+                     {
+                        name: 'jasmine',
+                         price: 18,
+                         image: 'path_to_image/jasmine.png',
+                     },
+                    {
+                         name: 'golden barrel cactus',
+                        price: 18,
+                         image: 'path_to_image/golden_barrel_cactus.png',
+                    },
+                     {
+                        name: 'monstera',
+                         price: 25,
+                         image: 'path_to_image/monstera.png',
+                     },
+                       {
+                         name: 'hardy kiwi vine',
+                         price: 25,
+                         image: 'path_to_image/hardy_kiwi_vine.png',
+                      },
+                    {
+                        name: 'Snake Plant',
+                        price: 15,
+                        image: 'path_to_image/Snake_Plant.png',
+                    },
+                     {
+                       name: 'Giant Taro',
+                       price: 20,
+                       image: 'path_to_image/Giant_Taro.webp',
+                    },
+                    {
+                       name: 'Tulip Purple Prince',
+                       price: 22,
+                       image: 'path_to_image/Tulip_Purple_Prince.png',
+                     },
+                ],
+            },
+            gardening: {
+                name: 'Gardening Tools',
+                items: [
+                    {
+                        name: 'Pot',
+                        price: 15,
+                        image: 'path_to_image/Flower_Pot.png',
+                    },
+                    {
+                        name: 'Axe',
+                        price: 25,
+                        image: 'path_to_image/Axe.png',
+                    },
+                    {
+                        name: 'Shovel',
+                        price: 35,
+                        image: 'path_to_image/Shovel.png',
+                    },
+                     {
+                       name: 'Lawn Mower',
+                       price: 150,
+                       image: 'path_to_image/Lawn_Mower.png'
+                     },
+                     {
+                       name: 'Watering Can',
+                       price: 18,
+                       image: 'path_to_image/Watering_Can.png'
+                     },
+                     {
+                       name: 'Garden Hose',
+                       price: 28,
+                        image: 'path_to_image/Garden_Hose.png'
+                     },
+                     {
+                       name: 'Rake',
+                       price: 22,
+                       image: 'path_to_image/Rake.png'
+                     },
+                    {
+                       name: 'Hedge Shears',
+                       price: 30,
+                       image: 'path_to_image/Hedge_Shears.png'
+                    },
+                    {
+                       name: 'Wheelbarrow',
+                       price: 70,
+                       image: 'path_to_image/Wheelbarrow.png'
+                    },
+                    {
+                       name: 'Gardening Gloves',
+                       price: 12,
+                       image: 'path_to_image/Gardening_Gloves.png'
+                   },
+                  {
+                      name: 'Gardening Boots',
+                      price: 40,
+                      image: 'path_to_image/Gardening_Boots.png'
+                  },
+                   {
+                       name: 'Urea Fertilizer',
+                       price: 20,
+                       image: 'path_to_image/Urea_Fertilizer.png'
+                   }
+                ],
+            },
+             saplings: {
+                name: 'Tree Saplings',
+                 items: [
+                     {
+                         name: 'Acacia',
+                         price: 40,
+                         image: 'path_to_image/Acacia.png',
+                     },
+                     {
+                         name: 'Baobab',
+                        price: 45,
+                        image: 'path_to_image/Baobab.png',
+                    },
+                     {
+                       name: 'Conocarpus',
+                        price: 38,
+                       image: 'path_to_image/Conocarpus.png',
+                     },
+                     {
+                         name: 'Desert Dates',
+                         price: 42,
+                         image: 'path_to_image/Desert_Dates.png',
+                     },
+                    {
+                         name: 'Ebony',
+                        price: 48,
+                         image: 'path_to_image/Ebony.png',
+                    },
+                    {
+                       name: 'Khaya',
+                       price: 50,
+                       image: 'path_to_image/Khaya.png',
+                     },
+                    {
+                        name: 'Lebbeck',
+                        price: 44,
+                        image: 'path_to_image/Lebbeck.png',
+                    },
+                    {
+                        name: 'Neem',
+                        price: 52,
+                        image: 'path_to_image/Neem.png',
+                    },
+                     {
+                         name: 'Tamarind',
+                         price: 55,
+                         image: 'path_to_image/Tamarind.png',
+                    },
+                ],
+           },
+           seeds: {
+               name: 'Seeds',
+                items: [
+                   {
+                       name: 'Mango Seeds',
+                       price: 5,
+                        image: 'path_to_image/Mango_Seed.png'
+                    },
+                   {
+                       name: 'Guava Seeds',
+                       price: 6,
+                       image: 'path_to_image/Guava_Seed.png'
+                   },
+                  {
+                       name: 'Papaya Seeds',
+                       price: 4,
+                      image: 'path_to_image/Papaya_Seed.png'
+                  },
+                 {
+                       name: 'Watermelon Seeds',
+                        price: 3,
+                        image: 'path_to_image/Watermelon_Seed.png'
+                  },
+                    {
+                       name: 'Date Palm Seeds',
+                       price: 7,
+                      image: 'path_to_image/Date_Palm_Seed.png'
+                   },
+                  {
+                       name: 'Baobab Seeds',
+                       price: 8,
+                        image: 'path_to_image/Baobab_Seed.png'
+                  },
+                   {
+                        name: 'Hibiscus Seeds',
+                        price: 5,
+                        image: 'path_to_image/Hibiscus_Seed.png'
+                   },
+                    {
+                       name: 'Tamarind Seeds',
+                       price: 6,
+                        image: 'path_to_image/Tamarind_Seed.png'
+                   },
+                   {
+                        name: 'Okra Seeds',
+                         price: 4,
+                         image: 'path_to_image/Okra_Seed.png'
+                    },
+                    {
+                        name: 'Fonio Seeds',
+                        price: 3,
+                       image: 'path_to_image/Fonio_Seed.png'
+                    },
+                     {
+                        name: 'Sorghum Seeds',
+                         price: 6,
+                        image: 'path_to_image/Sorghum_Seed.png'
+                     },
+                    {
+                        name: 'Millet Seeds',
+                         price: 5,
+                        image: 'path_to_image/Millet_Seed.png'
+                    },
+                 ]
+           }
+        };
+    
+   
+        // Get DOM elements
+        const categorySelect = document.getElementById('categorySelect');
+        const productGrid = document.getElementById('productGrid');
+        const cartTableBody = document.getElementById('cartTable').querySelector('tbody');
+        const totalAmountElement = document.getElementById('totalAmount');
+        const shoppingCart = []; // array to store shopping cart items
+
+        // Event listener for category selection
+        categorySelect.addEventListener('change', () => {
+            productGrid.innerHTML = ''; // clear previous products
+
+            // Check if the selected category exists
+            if (productData[categorySelect.value]) {
+                productData[categorySelect.value].items.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('product-card');
+
+                    // Add to cart container
+                    const addToCartContainer = document.createElement('div');
+                    addToCartContainer.classList.add('add-to-cart-container');
+
+                    const quantityInput = document.createElement('input');
+                    quantityInput.type = 'number';
+                    quantityInput.value = '1';
+                    quantityInput.min = '1';
+                    quantityInput.classList.add('quantity-input');
+
+                    const addToCartButton = document.createElement('button');
+                    addToCartButton.classList.add('add-to-cart-button');
+                    addToCartButton.textContent = 'Add to Cart';
+
+                    addToCartButton.addEventListener('click', () => {
+                        const quantity = parseInt(quantityInput.value, 10);
+                        if (quantity > 0) {
+                         addToCart(product.name, product.price, quantity);
+                        }
+                        
+                    });
+
+                    addToCartContainer.appendChild(quantityInput);
+                    addToCartContainer.appendChild(addToCartButton);
+
+                    // Added HTML to the card
+                    productCard.innerHTML = `
+                        <img class="product-image" src="${product.image}" alt="${product.name}">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">$${product.price.toFixed(2)}</div>
+                    `;
+                    productCard.appendChild(addToCartContainer);
+                    productGrid.appendChild(productCard);
+                });
+            }
+        });
+
+       // Function to add product to shopping cart
+        function addToCart(productName, productPrice, quantity) {
+            const existingCartItem = shoppingCart.find(item => item.name === productName);
+            if (existingCartItem) {
+                existingCartItem.quantity += quantity; // increment quantity if item already in cart
+            } else {
+                shoppingCart.push({ name: productName, price: productPrice, quantity: quantity }); // add a new item if not already in the cart
+            }
+            renderCart(); // update cart display
+        }
+
+         // Function to display the shopping cart
+        function renderCart() {
+            cartTableBody.innerHTML = ''; // Clear previous cart items
+            let cartTotal = 0; // initialize the cart total
+
+            // Iterate over cart items to build the table
+            shoppingCart.forEach(item => {
+                const tableRow = document.createElement('tr');
+                tableRow.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>$${(item.price * item.quantity).toFixed(2)}</td>
+                    <td><button class="remove-item-button" onclick="removeFromCart('${item.name}')">Remove</button></td>
+                `;
+                cartTableBody.appendChild(tableRow); // add row to table
+                cartTotal += item.price * item.quantity; // calculate total
+            });
+             // Apply tax or discount
+             let totalWithTaxDiscount = cartTotal;
+            if(cartTotal < 200 && cartTotal > 0) {
+               totalWithTaxDiscount = cartTotal * 1.15;
+            } else if (cartTotal >= 200) {
+               totalWithTaxDiscount = cartTotal * 0.85;
+            }
+
+            totalAmountElement.textContent = totalWithTaxDiscount.toFixed(2); // show the total amount
+        }
+
+        // Function to remove an item from the shopping cart
+       function removeFromCart(productName) {
+           const itemIndex = shoppingCart.findIndex(item => item.name === productName);
+           if (itemIndex !== -1) {
+               if (shoppingCart[itemIndex].quantity > 1) {
+                   shoppingCart[itemIndex].quantity--; // decrement quantity if more than one
+                } else {
+                    shoppingCart.splice(itemIndex, 1); // Remove the item if quantity is 1
+                }
+             renderCart(); // Update the cart display
+           }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+ // Product Data
+        const productData = {
+            ornamental: {
+                name: 'Ornamental Plants',
+                items: [
+                    {
+                        name: 'Portulaca Grandiflora',
+                        price: 12,
+                        image: 'Ornamental plants/PortulacaGrandiflora.png',
+                    },
+                     {
+                        name: 'Bougainvillea',
+                        price: 10,
+                        image: 'Ornamental plants/Bougainvillea.png',
+                    },
+                     {
+                        name: 'jasmine',
+                         price: 18,
+                         image: 'Ornamental plants/jasmine.png',
+                     },
+                    {
+                         name: 'golden barrel cactus',
+                        price: 18,
+                         image: 'Ornamental plants/Golden_Barrel_Cactus-removebg-preview.png',
+                    },
+                     {
+                        name: 'monstera',
+                         price: 25,
+                         image: 'Ornamental plants/Monstera.png',
+                     },
+                       {
+                         name: 'hardy kiwi vine',
+                         price: 25,
+                         image: 'Ornamental plants/Hardy Kiwi Vine.jpg',
+                      },
+                    {
+                        name: 'Snake Plant',
+                        price: 15,
+                        image: 'Ornamental plants/Snake Plant.png',
+                    },
+                     {
+                       name: 'Giant Taro',
+                       price: 20,
+                       image: 'Ornamental plants/Giant Taro.png',
+                    },
+                    {
+                       name: 'Tulip Purple Prince',
+                       price: 22,
+                       image: 'Ornamental plants/Purple_Prince_Tulips-removebg-preview.png',
+                     },
+                ],
+            },
+            gardening: {
+                name: 'Gardening Tools',
+                items: [
+                    {
+                        name: 'Pot',
+                        price: 15,
+                        image: 'gardening tools/flower_pot-removebg-preview.png',
+                    },
+                    {
+                        name: 'Axe',
+                        price: 25,
+                        image: 'gardening tools/axe-removebg-preview.png',
+                    },
+                    {
+                        name: 'Shovel',
+                        price: 35,
+                        image: 'gardening tools/shovel-removebg-preview.png',
+                    },
+                     {
+                       name: 'Lawn Mower',
+                       price: 150,
+                       image: 'gardening tools/lawn_mower-removebg-preview.png'
+                     },
+                     {
+                       name: 'Watering Can',
+                       price: 18,
+                       image: 'gardening tools/watering_can-removebg-preview.png'
+                     },
+                     {
+                       name: 'Garden Hose',
+                       price: 28,
+                        image: 'gardening tools/garden_hose-removebg-preview.png'
+                     },
+                     {
+                       name: 'Rake',
+                       price: 22,
+                       image: 'gardening tools/rake-removebg-preview.png'
+                     },
+                    {
+                       name: 'Hedge Shears',
+                       price: 30,
+                       image: 'gardening tools/hedge_shears-removebg-preview.png'
+                    },
+                    {
+                       name: 'Wheelbarrow',
+                       price: 70,
+                       image: 'gardening tools/wheelbarrow-removebg-preview.png'
+                    },
+                    {
+                       name: 'Gardening Gloves',
+                       price: 12,
+                       image: 'gardening tools/gardening_gloves-removebg-preview.png'
+                   },
+                  {
+                      name: 'Gardening Boots',
+                      price: 40,
+                      image: 'gardening tools/gardening_boots-removebg-preview.png'
+                  },
+                   {
+                       name: 'Urea Fertilizer',
+                       price: 20,
+                       image: 'gardening tools/urea_fertilizer-removebg-preview.png'
+                   }
+                ],
+            },
+             saplings: {
+                name: 'Tree Saplings',
+                 items: [
+                     {
+                         name: 'Acacia',
+                         price: 40,
+                         image: 'trees/acacia_sapling-removebg-preview.png',
+                     },
+                     {
+                         name: 'Baobab',
+                        price: 45,
+                        image: 'trees/Baobab-removebg-preview (1).png',
+                    },
+                     {
+                       name: 'Conocarpus',
+                        price: 38,
+                       image: 'trees/Conocarpus-removebg-preview.png',
+                     },
+                     {
+                         name: 'Desert Dates',
+                         price: 42,
+                         image: 'trees/desert_dates-removebg-preview (1).png',
+                     },
+                    {
+                         name: 'Ebony',
+                        price: 48,
+                         image: 'trees/ebony-removebg-preview.png',
+                    },
+                    {
+                       name: 'Khaya',
+                       price: 50,
+                       image: 'trees/Khaya-removebg-preview.png',
+                     },
+                    {
+                        name: 'Lebbeck',
+                        price: 44,
+                        image: 'trees/Lebbeck-removebg-preview.png',
+                    },
+                    {
+                        name: 'Neem',
+                        price: 52,
+                        image: 'trees/neem_sapling-removebg-preview.png',
+                    },
+                     {
+                         name: 'Tamarind',
+                         price: 55,
+                         image: 'trees/Tamarindus_indica_sapling-removebg-preview.png',
+                    },
+                ],
+           },
+           
+        };

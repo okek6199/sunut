@@ -1,0 +1,39 @@
+trees:
+acacia سنط
+neem نيم
+Tamarindus indica عرديب
+desert datesهجليج لالوب
+Baobabتبلدي
+Lebbeck لبخ   دقن الباشا
+Conocarpus المؤتمر الوطني
+Khaya مهوقني
+ebony الابنوس
+
+
+
+gardening tools:
+flower pot
+shovel
+lawn mower
+watering can
+garden hose
+rake
+hedge shears
+wheelbarrow
+gardening gloves
+gardening boots
+axe
+urea fertilizer
+
+
+
+
+Ornamental plants:
+PortulacaGrandiflora صباح الخير
+Bougainvillea جهنمية
+jasmine
+Golden Barrel Cactus
+Monstera 
+Hardy Kiwi Vine
+Snake Plant 'Zeylanica'
+Giant Taro
