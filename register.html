@@ -4,39 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Create an account — Ornamental Plants Shop</title>
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="auth.css">
 </head>
 <body>
-  <div class="auth-card">
-    <h1>Create an account 🌿</h1>
-    <p class="subtitle">Join to save favorites and track your orders.</p>
 
-    <div id="message" class="message"></div>
-
-    <form id="registerForm">
-      <label for="email">Email</label>
-      <input type="email" id="email" required autocomplete="email">
-
-      <label for="password">Password</label>
-      <input type="password" id="password" required autocomplete="new-password" minlength="8">
-
-      <button type="submit" id="submitBtn">Create account</button>
-    </form>
-
-    <p class="switch-link">Already have an account? <a href="login.html">Log in</a></p>
+  <!-- Shared Navbar -->
+  <div class="navbar">
+    <nav>
+      <ul id="MenuItems">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cart.html">Items</a></li>
+        <li><a href="cart.html">Checkout</a></li>
+        <li><a href="CONTACTUS.html">Contact Us</a></li>
+      </ul>
+    </nav>
+    <a href="cart.html">
+      <img src="carts.png" width="30px" height="30px">
+    </a>
+    <img src="menu_icon-removebg-preview.png" class="menu-icon" onclick="menutoggle()">
   </div>
+
+  <!-- Shared Header / Logo -->
+  <div class="header-container">
+    <div class="logo-container">
+      <a href="index.html">
+        <img class="logo" src="SUNUT.1-removebg-preview.png" width="125px">
+      </a>
+    </div>
+  </div>
+
+  <!-- Register Card -->
+  <div class="auth-page-wrapper">
+    <div class="auth-card">
+      <h1>Create an account 🌿</h1>
+      <p class="subtitle">Join to save favorites and track your orders.</p>
+      <div id="message" class="message"></div>
+      <form id="registerForm">
+        <label for="email">Email</label>
+        <input type="email" id="email" required autocomplete="email">
+        <label for="password">Password</label>
+        <input type="password" id="password" required autocomplete="new-password" minlength="8">
+        <button type="submit" id="submitBtn">Create account</button>
+      </form>
+      <p class="switch-link">Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+  </div>
+
+  <!-------FOOTER------->
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Sunut Ornamental Plants Shop. All rights reserved.</p>
+  </footer>
 
   <script src="auth.js"></script>
   <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
     const form = document.getElementById('registerForm');
     const messageEl = document.getElementById('message');
     const submitBtn = document.getElementById('submitBtn');
-
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       submitBtn.disabled = true;
       submitBtn.textContent = 'Creating account...';
-
       try {
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
