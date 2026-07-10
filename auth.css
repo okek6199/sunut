@@ -6,26 +6,21 @@
   --ink: #2a2a24;
   --error: #b23a3a;
 }
+
 * { box-sizing: border-box; }
 
-/* NOTE: body layout (background, margin) is intentionally left to style.css
-   so the login page matches the rest of the site's shared chrome.
-   Only page-specific styling lives here. */
 body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  color: var(--ink);
-}
-
-/* Centers just the auth card in the space below the navbar/header
-   and above the footer -- does not affect navbar/header/footer layout.
-   No background here: the page uses the site's green gradient from
-   style.css's body rule, same as cart.html/index.html. */
-.auth-page-wrapper {
+  margin: 0;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
-  min-height: calc(100vh - 220px); /* roughly navbar + header + footer height; adjust to taste */
+  background: var(--cream);
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(63,107,63,0.08) 0, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(181,101,29,0.08) 0, transparent 40%);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: var(--ink);
 }
 
 .auth-card {
@@ -37,16 +32,19 @@ body {
   padding: 36px 32px;
   box-shadow: 0 10px 30px rgba(44, 77, 44, 0.08);
 }
+
 .auth-card h1 {
   margin: 0 0 4px;
   font-size: 1.5rem;
   color: var(--leaf-dark);
 }
+
 .auth-card .subtitle {
   margin: 0 0 24px;
   font-size: 0.9rem;
   color: #6b6b5f;
 }
+
 label {
   display: block;
   font-size: 0.85rem;
@@ -54,6 +52,7 @@ label {
   margin-bottom: 6px;
   color: var(--leaf-dark);
 }
+
 input[type="email"],
 input[type="password"] {
   width: 100%;
@@ -64,11 +63,13 @@ input[type="password"] {
   font-size: 0.95rem;
   background: #fdfcf8;
 }
+
 input:focus {
   outline: 2px solid var(--leaf);
   outline-offset: 1px;
 }
-.auth-card button {
+
+button {
   width: 100%;
   padding: 11px;
   background: var(--leaf);
@@ -80,16 +81,20 @@ input:focus {
   cursor: pointer;
   transition: background 0.15s ease;
 }
-.auth-card button:hover { background: var(--leaf-dark); }
-.auth-card button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+button:hover { background: var(--leaf-dark); }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
 .switch-link {
   margin-top: 18px;
   font-size: 0.85rem;
   text-align: center;
   color: #6b6b5f;
 }
+
 .switch-link a { color: var(--leaf); font-weight: 600; text-decoration: none; }
 .switch-link a:hover { text-decoration: underline; }
+
 .message {
   padding: 10px 12px;
   border-radius: 8px;
@@ -97,14 +102,6 @@ input:focus {
   margin-bottom: 16px;
   display: none;
 }
+
 .message.error { display: block; background: #fbeaea; color: var(--error); }
 .message.success { display: block; background: #eaf3ea; color: var(--leaf-dark); }
-
-/* Site footer, styled to match the green identity instead of the old cream palette */
-.site-footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 0.8rem;
-  color: #eef3ee;
-  background: var(--leaf-dark);
-}
