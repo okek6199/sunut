@@ -17,16 +17,15 @@ body {
 }
 
 /* Centers just the auth card in the space below the navbar/header
-   and above the footer -- does not affect navbar/header/footer layout */
+   and above the footer -- does not affect navbar/header/footer layout.
+   No background here: the page uses the site's green gradient from
+   style.css's body rule, same as cart.html/index.html. */
 .auth-page-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
   min-height: calc(100vh - 220px); /* roughly navbar + header + footer height; adjust to taste */
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(63,107,63,0.08) 0, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(181,101,29,0.08) 0, transparent 40%);
 }
 
 .auth-card {
@@ -101,12 +100,11 @@ input:focus {
 .message.error { display: block; background: #fbeaea; color: var(--error); }
 .message.success { display: block; background: #eaf3ea; color: var(--leaf-dark); }
 
-/* Simple site footer to match the earth-tone palette */
+/* Site footer, styled to match the green identity instead of the old cream palette */
 .site-footer {
   text-align: center;
   padding: 20px;
   font-size: 0.8rem;
-  color: #6b6b5f;
-  border-top: 1px solid #e4ddc9;
-  background: var(--cream);
+  color: #eef3ee;
+  background: var(--leaf-dark);
 }
